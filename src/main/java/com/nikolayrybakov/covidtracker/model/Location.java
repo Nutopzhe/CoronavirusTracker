@@ -4,6 +4,7 @@ public class Location {
     private String state;
     private String country;
     private int totalCases;
+    private int delta;
 
     public String getState() {
         return state;
@@ -29,12 +30,22 @@ public class Location {
         this.totalCases = totalCases;
     }
 
+
+    public int getDelta() {
+        return delta;
+    }
+
+    public void setDelta(int delta) {
+        this.delta = delta;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
                 "state='" + state + '\'' +
                 ", country='" + country + '\'' +
                 ", totalCases=" + totalCases +
+                ", delta=" + delta +
                 '}';
     }
 }

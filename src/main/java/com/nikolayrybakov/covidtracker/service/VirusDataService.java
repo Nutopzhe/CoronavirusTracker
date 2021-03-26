@@ -30,6 +30,10 @@ public class VirusDataService {
         return allStats.stream().mapToInt(Location::getTotalCases).sum();
     }
 
+    public int getTotalNewCases() {
+        return allStats.stream().mapToInt(Location::getDelta).sum();
+    }
+
     @PostConstruct
     @Scheduled(cron = "* * 1 * * * ")
     public void fetchVirusData() throws IOException, InterruptedException {
@@ -49,7 +53,14 @@ public class VirusDataService {
             Location location = new Location();
             location.setState(record.get("Province/State"));
             location.setCountry(record.get("Country/Region"));
-            location.setTotalCases(Integer.parseInt(record.get(record.size()-1)));
+
+            //получение значения из последнего дня
+            int lastDay = Integer.parseInt(record.get(record.size() - 1));
+            //получение значения из предпоследнего дня
+            int secondToLast = Integer.parseInt(record.get(record.size() - 2));
+
+            location.setTotalCases(lastDay);
+            location.setDelta(lastDay - secondToLast);
             newStats.add(location);
         }
         this.allStats = newStats;

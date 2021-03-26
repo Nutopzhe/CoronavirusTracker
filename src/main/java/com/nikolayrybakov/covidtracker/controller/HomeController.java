@@ -16,6 +16,7 @@ public class HomeController {
     public String home(Model model) {
         model.addAttribute("statistics", virusDataService.getAllStats());
         model.addAttribute("totalReportedCases", virusDataService.getTotalCases());
+        model.addAttribute("totalNewCases", virusDataService.getTotalNewCases());
         return "home";
     }
 }

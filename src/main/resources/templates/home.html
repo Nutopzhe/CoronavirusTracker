@@ -18,19 +18,28 @@
     <div class="p-3 mb-2 bg-secondary text-white">
         <h1 class="display-4">Total cases reported worldwide</h1>
         <h1 class="display-6" th:text="${totalReportedCases}"></h1>
+        <hr class="my-4">
+        <p>
+            <samp>New cases since previous day - </samp>
+            <samp th:text="${totalNewCases}"></samp>
+        </p>
     </div>
-    <br>
 
+    <br>
     <table class="table">
+        <thead>
         <tr>
             <th>State</th>
             <th>Country</th>
             <th>Total cases</th>
+            <th>Changes since last day</th>
         </tr>
+        </thead>
         <tr th:each="stats : ${statistics}">
             <td th:text="${stats.state}"></td>
             <td th:text="${stats.country}"></td>
             <td th:text="${stats.totalCases}"></td>
+            <td th:text="${stats.delta}"></td>
         </tr>
     </table>
 </div>
