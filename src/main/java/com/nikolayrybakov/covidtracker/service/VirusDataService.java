@@ -26,6 +26,10 @@ public class VirusDataService {
         return allStats;
     }
 
+    public int getTotalCases() {
+        return allStats.stream().mapToInt(Location::getTotalCases).sum();
+    }
+
     @PostConstruct
     @Scheduled(cron = "* * 1 * * * ")
     public void fetchVirusData() throws IOException, InterruptedException {
