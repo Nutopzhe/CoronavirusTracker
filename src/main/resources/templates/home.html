@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>COVID Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<!--<p th:text="${stats}"></p>-->
+<table>
+    <tr>
+        <th>Провинция / Штат</th>
+        <th>Страна / Регион</th>
+        <th>Всего случаев</th>
+    </tr>
+    <tr th:each="stats : ${statistics}">
+        <td th:text="${stats.state}"></td>
+        <td th:text="${stats.country}"></td>
+        <td th:text="${stats.totalCases}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
