@@ -1,18 +1,11 @@
 package com.nikolayrybakov.covidtracker.model;
 
+import java.util.Objects;
+
 public class Location {
-    private String state;
     private String country;
     private int totalCases;
     private int delta;
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
 
     public String getCountry() {
         return country;
@@ -40,10 +33,22 @@ public class Location {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return Objects.equals(country, location.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(country);
+    }
+
+    @Override
     public String toString() {
         return "Location{" +
-                "state='" + state + '\'' +
-                ", country='" + country + '\'' +
+                "country='" + country + '\'' +
                 ", totalCases=" + totalCases +
                 ", delta=" + delta +
                 '}';

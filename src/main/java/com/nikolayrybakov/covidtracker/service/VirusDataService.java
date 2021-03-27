@@ -14,6 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -51,9 +52,8 @@ public class VirusDataService {
         //2. Добавляем в list
         for (CSVRecord record : records) {
             Location location = new Location();
-            location.setState(record.get("Province/State"));
-            location.setCountry(record.get("Country/Region"));
 
+            location.setCountry(record.get("Country/Region"));
             //получение значения из последнего дня
             int lastDay = Integer.parseInt(record.get(record.size() - 1));
             //получение значения из предпоследнего дня
@@ -61,7 +61,15 @@ public class VirusDataService {
 
             location.setTotalCases(lastDay);
             location.setDelta(lastDay - secondToLast);
-            newStats.add(location);
+
+            //добавление общих случаев только по стране, исключая провинцию
+            if (newStats.contains(location)) {
+                Location loc = newStats.get(newStats.indexOf(location));
+                loc.setTotalCases(loc.getTotalCases() + location.getTotalCases());
+                loc.setDelta(loc.getDelta() + location.getDelta());
+            } else {
+                newStats.add(location);
+            }
         }
         this.allStats = newStats;
     }
