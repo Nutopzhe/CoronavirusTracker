@@ -29,12 +29,14 @@
     <table class="table">
         <thead>
         <tr>
+            <th class="table-light">#</th>
             <th>Country</th>
             <th>Total cases</th>
             <th>Changes since last day</th>
         </tr>
         </thead>
         <tr th:each="stats : ${statistics}">
+            <th class="table-light" th:text="${stats.id}"></th>
             <td th:text="${stats.country}"></td>
             <td th:text="${stats.totalCases}"></td>
             <td th:text="${stats.delta}"></td>
