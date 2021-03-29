@@ -12,3 +12,5 @@ _____________________________
 ### Стэк технологий:
 - Spring Boot
 - Apache Commons CSV
+- Thymeleaf
+- Bootstrap
